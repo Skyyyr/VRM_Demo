@@ -1,0 +1,20 @@
+﻿name: Build and Update Containers
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build Docker Compose
+      run: docker-compose up --build -d
+      
+    # This step is optional but useful if you want to ensure everything is running as expected
+    - name: List running Docker containers
+      run: docker ps -a
